@@ -46,7 +46,7 @@ app.get("/scrape", function(req, res) {
 
       // Add the text and href of every link, and save them as properties of the result object
       result.title = $(this)
-        .children("a")
+        .children()
         .text();
       result.link = $(this)
         .children("a")
@@ -68,3 +68,4 @@ app.get("/scrape", function(req, res) {
     res.send("Scrape Complete");
   });
 });
+

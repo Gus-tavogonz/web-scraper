@@ -1,9 +1,20 @@
 // Grab the articles as a json
+
+
+
 $.getJSON("/articles", function(data) {
   // For each one
   for (var i = 0; i < data.length; i++) {
+
+    
+   
+
+
+
     // Display the apropos information on the page
-    $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
+
+
+$("#articles").append( "<div class='article card'>" + "<h5 class='card-title'>" + data[i].title + "</h5>" + "<br>" + "<p class='card-text' data-id= '" + data[i]._id + "'>" + data[i].link + "</p>" + "<div>" + "<button type='button' class='btn btn-primary'>"+ "Save Article!" + "</button>" + "</div" + "</div");
   }
 });
 
