@@ -1,22 +1,24 @@
 // Grab the articles as a json
 
+// $("#scrape").on("click", function(){
 
+// })
 
 $.getJSON("/articles", function(data) {
   // For each one
   for (var i = 0; i < data.length; i++) {
-
-    
-   
-
-
-
     // Display the apropos information on the page
 
 
-$("#articles").append( "<div class='article card'>" + "<h5 class='card-title'>" + data[i].title + "</h5>" + "<br>" + "<p class='card-text' data-id= '" + data[i]._id + "'>" + data[i].link + "</p>" + "<div>" + "<button type='button' class='btn btn-primary'>"+ "Save Article!" + "</button>" + "</div" + "</div");
+$("#articles").append( "<div class='article card'>" + "<h5 class='card-title'>" + data[i].title + "</h5>" + "<br>" + "<p class='card-text' data-id= '" + data[i]._id + "'>" + data[i].link + "</p>" + "<div>" + "<button type='button' id='save' class='btn btn-primary'>"+ "Save Article!" + "</button>" + "</div" + "</div");
   }
 });
+
+$("#save").on("click", function(){
+   console.log("click")
+})
+
+
 
 
 // Whenever someone clicks a p tag
@@ -81,3 +83,6 @@ $(document).on("click", "#savenote", function() {
   $("#titleinput").val("");
   $("#bodyinput").val("");
 });
+
+
+

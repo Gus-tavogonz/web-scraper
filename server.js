@@ -31,7 +31,9 @@ mongoose.connect("mongodb://localhost/thisIsColossalPopulated", { useNewUrlParse
 
 // Routes
 
-// A GET route for scraping the echoJS website
+
+
+// A GET route for scraping the thisisColossal website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with axios
   axios.get("https://www.thisiscolossal.com//").then(function(response) {
@@ -81,6 +83,14 @@ app.get("/articles", function(req, res) {
       res.json(err);
     });
 });
+
+app.get("/saved", function (req, res){
+
+  
+})
+
+
+
 
 // Route for grabbing a specific Article by id, populate it with it's note
 app.get("/articles/:id", function(req, res) {
