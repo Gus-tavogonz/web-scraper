@@ -27,8 +27,8 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/thisIsColossalPopulated", { useNewUrlParser: true });
-
+//mongoose.connect("mongodb://localhost/thisIsColossalPopulated", { useNewUrlParser: true });
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/thisIsColossalPopulated"
 // Routes
 
 
@@ -36,7 +36,7 @@ mongoose.connect("mongodb://localhost/thisIsColossalPopulated", { useNewUrlParse
 // A GET route for scraping the thisisColossal website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with axios
-  axios.get("https://www.thisiscolossal.com//").then(function(response) {
+  axios.get("https://www.thisiscolossal.com/").then(function(response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
 
