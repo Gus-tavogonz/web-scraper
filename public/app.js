@@ -9,16 +9,11 @@ $.getJSON("/articles", function(data) {
   for (var i = 0; i < data.length; i++) {
     // Display the apropos information on the page
 
+    var number = i;
 
-$("#articles").append( "<div class='article card'>" + "<h5 class='card-title'>" + data[i].title + "</h5>" + "<br>" + "<p class='card-text' data-id= '" + data[i]._id + "'>" + data[i].link + "</p>" + "<div>" + "<button type='button' id='save' class='btn btn-primary'>"+ "Save Article!" + "</button>" + "</div" + "</div");
+$("#articles").append( "<div class='article card' data-id='" + number +  "'>" + "<h5 class='card-title'>" + data[i].title + "</h5>" + "<br>" + "<p class='card-text' data-id= '" + data[i]._id + "'>" + data[i].link + "</p>" + "<div>" + "<button type='button' id='save' class='btn btn-primary' data-id='" + data[i]._id + "'>" +  "Save Article!" + "</button>" + "</div" + "</div");
   }
 });
-
-$("#save").on("click", function(){
-   console.log("click")
-})
-
-
 
 
 // Whenever someone clicks a p tag
@@ -84,5 +79,24 @@ $(document).on("click", "#savenote", function() {
   $("#bodyinput").val("");
 });
 
+
+$(document).on("click", "#save", function(){
+   
+  var articleId = $(this).attr("data-id");
+
+  $.ajax({
+    method: "POST",
+    url: "/articles/" + articleId,
+    dataType: "json",
+    data:{
+      saved:true
+    }
+  })
+  .then(function(data){
+    
+    console.log(data)
+  })
+
+})
 
 

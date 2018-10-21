@@ -84,10 +84,8 @@ app.get("/articles", function(req, res) {
     });
 });
 
-app.get("/saved", function (req, res){
 
-  
-})
+
 
 
 
@@ -127,6 +125,46 @@ app.post("/articles/:id", function(req, res) {
       res.json(err);
     });
 });
+
+app.put("/articles/:id", function(req,res){
+
+  db.Article.update(red.body)
+  .then(function(dbArticle){
+    return db.Article.findOneAndUpdate({_id: req.params.id}, {saved: true});
+  })
+  .then(function(dbArticle){
+    res.json(dbArticle)
+  })
+
+
+  // db.Article.update(
+
+  //   {
+  //     _id: mongojs.ObjectId(req.params.id)
+  //   },
+  //   {
+  //     $set:{
+  //       saved: true
+  //     }
+  //   },
+  //   function (error, edited){
+  //     if (error){
+  //       console.log(error);
+  //       res.send(error);
+  //     }
+  //     else{
+  //       console.log(edited);
+  //       res.send(edited);
+  //     }
+  //   }
+
+  // )
+
+})
+
+
+
+
 
 // Start the server
 app.listen(PORT, function() {
