@@ -28,6 +28,12 @@ app.use(express.static("public"));
 
 // Connect to the Mongo DB
 mongoose.connect("mongodb://localhost/thisIsColossalPopulated", { useNewUrlParser: true });
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/thisIsColossalPopulated";
+
+mongoose.connect(MONGODB_URI);
+
+
+
 
 // Routes
 
