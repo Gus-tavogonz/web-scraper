@@ -27,16 +27,14 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
-//mongoose.connect("mongodb://localhost/thisIsColossalPopulated", { useNewUrlParser: true });
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/thisIsColossalPopulated"
+mongoose.connect("mongodb://localhost/thisIsColossalPopulated", { useNewUrlParser: true });
+
 // Routes
 
-
-
-// A GET route for scraping the thisisColossal website
+// A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with axios
-  axios.get("https://www.thisiscolossal.com/").then(function(response) {
+  axios.get("http://www.thisiscolossal.com/").then(function(response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
 
@@ -84,12 +82,6 @@ app.get("/articles", function(req, res) {
     });
 });
 
-
-
-
-
-
-
 // Route for grabbing a specific Article by id, populate it with it's note
 app.get("/articles/:id", function(req, res) {
   // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
@@ -125,46 +117,6 @@ app.post("/articles/:id", function(req, res) {
       res.json(err);
     });
 });
-
-app.put("/articles/:id", function(req,res){
-
-  db.Article.update(red.body)
-  .then(function(dbArticle){
-    return db.Article.findOneAndUpdate({_id: req.params.id}, {saved: true});
-  })
-  .then(function(dbArticle){
-    res.json(dbArticle)
-  })
-
-
-  // db.Article.update(
-
-  //   {
-  //     _id: mongojs.ObjectId(req.params.id)
-  //   },
-  //   {
-  //     $set:{
-  //       saved: true
-  //     }
-  //   },
-  //   function (error, edited){
-  //     if (error){
-  //       console.log(error);
-  //       res.send(error);
-  //     }
-  //     else{
-  //       console.log(edited);
-  //       res.send(edited);
-  //     }
-  //   }
-
-  // )
-
-})
-
-
-
-
 
 // Start the server
 app.listen(PORT, function() {

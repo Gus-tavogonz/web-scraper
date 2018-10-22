@@ -1,9 +1,5 @@
 // Grab the articles as a json
 
-// $("#scrape").on("click", function(){
-
-// })
-
 $.getJSON("/articles", function(data) {
   // For each one
   for (var i = 0; i < data.length; i++) {
@@ -78,25 +74,3 @@ $(document).on("click", "#savenote", function() {
   $("#titleinput").val("");
   $("#bodyinput").val("");
 });
-
-
-$(document).on("click", "#save", function(){
-   
-  var articleId = $(this).attr("data-id");
-
-  $.ajax({
-    method: "POST",
-    url: "/articles/" + articleId,
-    dataType: "json",
-    data:{
-      saved:true
-    }
-  })
-  .then(function(data){
-    
-    console.log(data)
-  })
-
-})
-
-
